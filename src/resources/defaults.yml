@@ -1,0 +1,9 @@
+settings:
+  server_switch_messages: true
+  leave_messages: true
+  join_messages: true
+  requests: true
+
+requests: []
+
+friends: {}

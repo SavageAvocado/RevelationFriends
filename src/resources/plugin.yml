@@ -1,0 +1,8 @@
+name: RevelationFriends
+description: None.
+
+author: SavageAvocado.
+website: savagedev.net
+
+main: net.savagedev.friends.spigot.RevelationFriends
+version: 1.0

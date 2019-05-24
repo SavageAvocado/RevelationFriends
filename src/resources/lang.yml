@@ -1,0 +1,4 @@
+error:
+  invalid-arguments: '&cInvalid arguments! Try: /f %cmd%'
+  unknown-player: ''
+  no-permission: ''

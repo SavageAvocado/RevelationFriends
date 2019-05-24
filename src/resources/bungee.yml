@@ -1,0 +1,5 @@
+name: RevelationFriends
+version: 1.0
+
+main: net.savagedev.friends.bungee.RevelationFriends
+author: SavageAvocado
