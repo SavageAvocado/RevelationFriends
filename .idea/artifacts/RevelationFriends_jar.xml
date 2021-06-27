@@ -3,11 +3,11 @@
     <output-path>E:/Servers/Revelation 1.13.2/Proxy/plugins</output-path>
     <root id="archive" name="RevelationFriends.jar">
       <element id="module-output" name="RevelationFriends" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/resources/config.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/resources/lang.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/resources/bungee.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/resources/defaults.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/resources/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/spigot/src/main/resources/config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/spigot/src/main/resources/lang.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/bungee/src/main/resources/bungee.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/bungee/src/main/resources/defaults.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/spigot/src/main/resources/plugin.yml" />
     </root>
   </artifact>
 </component>

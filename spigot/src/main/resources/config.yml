@@ -1,0 +1,8 @@
+friend-hit-messages:
+  - "&cWould you like it if your friend hit you?"
+  - "&cDon't hit your friends!"
+  - "&cPlay nice!"
+  - ":("
+
+pvp-enabled:
+  - "pvp"
