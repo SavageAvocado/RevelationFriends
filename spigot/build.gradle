@@ -1,0 +1,32 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+}
+
+group 'net.revelationmc'
+version '1.2.0-SNAPSHOT'
+
+repositories {
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots' }
+}
+
+dependencies {
+    compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
+
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    implementation project(':common')
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    from(sourceSets.main.resources.srcDirs) {
+        expand 'version': project.version
+        include 'plugin.yml'
+    }
+}
+
+shadowJar {
+    relocate('com.zaxxer', 'net.revelationmc.libs')
+
+    archiveFileName = "${rootProject.name}-Spigot-${project.version}.jar"
+}
