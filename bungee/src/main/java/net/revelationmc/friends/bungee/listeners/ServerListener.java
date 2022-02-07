@@ -4,7 +4,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerSwitchEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.revelationmc.friends.bungee.model.friend.Friend;
+import net.revelationmc.friends.bungee.model.friend.Friendship;
 import net.revelationmc.friends.bungee.model.user.UserSetting;
 import net.revelationmc.friends.bungee.utils.MessageUtils;
 import net.revelationmc.friends.bungee.RevelationFriendsPlugin;
@@ -28,9 +28,9 @@ public class ServerListener implements Listener {
             return;
         }
 
-        for (Friend friend : this.plugin.getUserManager().getOrLoad(uuid).join().getFriends()) {
-            if (friend.isOnline()) {
-                final ProxiedPlayer friendPlayer = this.plugin.getProxy().getPlayer(friend.getUuid());
+        for (Friendship friendship : this.plugin.getUserManager().getOrLoad(uuid).join().getFriends()) {
+            if (friendship.isOnline()) {
+                final ProxiedPlayer friendPlayer = this.plugin.getProxy().getPlayer(friendship.getUuid());
                 if (this.plugin.getUserManager().getOrLoad(friendPlayer.getUniqueId()).join().getSettings().get(UserSetting.SERVER_CHANGE_MESSAGES)) {
                     MessageUtils.message(friendPlayer, "&3Friends &8|&7 " + player.getDisplayName() + " &7connected to " + player.getServer().getInfo().getName() + ".");
                 }

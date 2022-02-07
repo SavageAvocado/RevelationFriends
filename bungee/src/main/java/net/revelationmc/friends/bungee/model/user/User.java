@@ -1,155 +1,55 @@
 package net.revelationmc.friends.bungee.model.user;
 
+import com.google.common.collect.ImmutableSet;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.revelationmc.friends.bungee.model.friend.Friend;
+import net.revelationmc.friends.bungee.model.friend.Friendship;
 import net.revelationmc.friends.bungee.model.friend.FriendRequest;
 
 import java.util.*;
 
 public class User {
-    private final String username;
-    private final UUID uuid;
+    private final Map<UserSetting, Boolean> settingsMap = new HashMap<>();
 
-    private final SettingsMap settings = new SettingsMap();
-    private final Map<UUID, FriendRequest> requests = new HashMap<>();
-    private final Map<UUID, Friend> friends = new HashMap<>();
+    private final Set<FriendRequest> requests;
+    private final Set<Friendship> friendships;
 
-    public User(String username, UUID uuid) {
-        this.username = username;
-        this.uuid = uuid;
+    private final ProxiedPlayer player;
+
+    public User(ProxiedPlayer player, Set<FriendRequest> requests, Set<Friendship> friendships) {
+        this.player = player;
+        this.requests = requests;
+        this.friendships = friendships;
     }
 
     public void addFriendRequest(FriendRequest request) {
-        this.requests.put(request.getSenderUuid(), request);
+        this.requests.add(request);
     }
 
-    public void removeFriendRequest(FriendRequest request) {
-        this.requests.remove(request.getSenderUuid());
+    public void removeFriendRequest(UUID senderId) {
+        this.requests.removeIf(request -> request.getSenderId().equals(senderId));
     }
 
-    public void addFriend(FriendRequest request) {
-        this.friends.put(request.getSenderUuid(), new Friend(request.getSenderUuid(), request.getSenderName(), request.getSenderUuid(), System.currentTimeMillis()));
+    public void addFriendship(Friendship friendship) {
+        this.friendships.add(friendship);
     }
 
-    public void addFriend(ProxiedPlayer player) {
-        this.friends.put(player.getUniqueId(), new Friend(player.getUniqueId(), player.getName(), player.getUniqueId(), System.currentTimeMillis()));
+    public void removeFriendship(UUID friendId) {
+        this.friendships.removeIf(friendship -> friendship.getFriendId().equals(friendId));
     }
 
-    public void addFriend(Friend friend) {
-        this.friends.put(friend.getUuid(), friend);
+    public Map<UserSetting, Boolean> getSettingsMap() {
+        return this.settingsMap;
     }
 
-    public void removeFriend(UUID uuid) {
-        this.friends.remove(uuid);
+    public Set<FriendRequest> getFriendRequests() {
+        return ImmutableSet.copyOf(this.requests);
     }
 
-    public boolean isFriendsWith(UUID uuid) {
-        return this.friends.containsKey(uuid);
+    public Set<Friendship> getFriendships() {
+        return ImmutableSet.copyOf(this.friendships);
     }
 
-    public boolean hasRequestFrom(UUID uuid) {
-        return this.requests.containsKey(uuid);
-    }
-
-    public FriendRequest getFriendRequest(UUID uuid) {
-        return this.requests.get(uuid);
-    }
-
-    public Friend getFriend(UUID uuid) {
-        return this.friends.get(uuid);
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public UUID getUuid() {
-        return this.uuid;
-    }
-
-    public SettingsMap getSettings() {
-        return this.settings;
-    }
-
-    public Collection<FriendRequest> getFriendRequests() {
-        return this.requests.values();
-    }
-
-    public Collection<Friend> getFriends() {
-        return this.friends.values();
-    }
-
-    public static final class SettingsMap implements Map<UserSetting, Boolean> {
-        private final Map<UserSetting, Boolean> map = new HashMap<>();
-
-        public SettingsMap() {
-            for (UserSetting setting : UserSetting.values()) {
-                this.map.put(setting, setting.getDefault());
-            }
-        }
-
-        public void set(UserSetting setting, boolean value) {
-            this.map.replace(setting, value);
-        }
-
-        @Override
-        public int size() {
-            return UserSetting.values().length;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return false;
-        }
-
-        @Override
-        public boolean containsKey(Object key) {
-            return key instanceof UserSetting;
-        }
-
-        @Override
-        public boolean containsValue(Object value) {
-            return value instanceof Boolean;
-        }
-
-        @Override
-        public Boolean get(Object key) {
-            return this.map.get(key);
-        }
-
-        @Override
-        public Boolean put(UserSetting key, Boolean value) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Boolean remove(Object key) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void putAll(Map<? extends UserSetting, ? extends Boolean> m) {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public void clear() {
-            throw new UnsupportedOperationException();
-        }
-
-        @Override
-        public Set<UserSetting> keySet() {
-            return this.map.keySet();
-        }
-
-        @Override
-        public Collection<Boolean> values() {
-            return this.map.values();
-        }
-
-        @Override
-        public Set<Entry<UserSetting, Boolean>> entrySet() {
-            return this.map.entrySet();
-        }
+    public ProxiedPlayer getPlayer() {
+        return this.player;
     }
 }

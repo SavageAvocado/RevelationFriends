@@ -5,12 +5,11 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
-import net.revelationmc.friends.bungee.model.friend.Friend;
+import net.revelationmc.friends.bungee.model.friend.Friendship;
 import net.revelationmc.friends.bungee.RevelationFriendsPlugin;
 import net.revelationmc.friends.common.ProtocolConstants;
 
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -56,8 +55,8 @@ public class PluginMessageManager implements Listener {
 
                 StringBuilder friends = new StringBuilder();
 
-                for (Friend friend : this.plugin.getUserManager().getOrLoad(uuid).join().getFriends()) {
-                    friends.append(friend.getUuid().toString()).append(",");
+                for (Friendship friendship : this.plugin.getUserManager().getOrLoad(uuid).join().getFriends()) {
+                    friends.append(friendship.getUuid().toString()).append(",");
                 }
 
                 this.send(user.getServer().getInfo(), "GetFriends", uuid.toString(), friends.toString().trim());

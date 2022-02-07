@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.revelationmc.friends.bungee.RevelationFriendsPlugin;
-import net.revelationmc.friends.bungee.model.friend.Friend;
+import net.revelationmc.friends.bungee.model.friend.Friendship;
 import net.revelationmc.friends.bungee.model.user.User;
 import net.revelationmc.friends.bungee.utils.MessageUtils;
 
@@ -31,7 +31,7 @@ public class ListCmd implements SubCommand {
     }
 
     @Override
-    public void execute(CommandSender sender, String... args) {
+    public void execute(CommandSender sender, String label, String... args) {
         if (!(sender instanceof ProxiedPlayer)) {
             return;
         }
@@ -58,17 +58,17 @@ public class ListCmd implements SubCommand {
 
             MessageUtils.message(player, this.getHeader(page));
 
-            final List<Friend> friends = this.getSortedFriendsList(fuser.getFriends());
+            final List<Friendship> friendships = this.getSortedFriendsList(fuser.getFriends());
 
-            for (int i = ((page - 1) * PAGE_SIZE) > friends.size() ? 0 : (page - 1) * PAGE_SIZE; i < Math.min(PAGE_SIZE * page, friends.size()); i++) {
-                final Friend friend = friends.get(i);
+            for (int i = ((page - 1) * PAGE_SIZE) > friendships.size() ? 0 : (page - 1) * PAGE_SIZE; i < Math.min(PAGE_SIZE * page, friendships.size()); i++) {
+                final Friendship friendship = friendships.get(i);
 
-                if (friend.isOnline()) {
-                    MessageUtils.message(player, this.getOnlineFriendMessage(friend));
+                if (friendship.isOnline()) {
+                    MessageUtils.message(player, this.getOnlineFriendMessage(friendship));
                     continue;
                 }
 
-                MessageUtils.message(player, this.getOfflineFriendMessage(friend));
+                MessageUtils.message(player, this.getOfflineFriendMessage(friendship));
             }
 
             MessageUtils.message(player, "&8&l&m-------------------------------------------");
@@ -79,34 +79,34 @@ public class ListCmd implements SubCommand {
 
     }
 
-    private List<Friend> getSortedFriendsList(Collection<Friend> friends) {
-        List<Friend> sorted = new ArrayList<>();
+    private List<Friendship> getSortedFriendsList(Collection<Friendship> friendships) {
+        List<Friendship> sorted = new ArrayList<>();
 
-        sorted.addAll(this.getOnlineFriends(friends));
-        sorted.addAll(this.getOfflineFriends(friends));
+        sorted.addAll(this.getOnlineFriends(friendships));
+        sorted.addAll(this.getOfflineFriends(friendships));
 
         return sorted;
     }
 
-    private List<Friend> getOnlineFriends(Collection<Friend> friends) {
-        List<Friend> online = new ArrayList<>();
+    private List<Friendship> getOnlineFriends(Collection<Friendship> friendships) {
+        List<Friendship> online = new ArrayList<>();
 
-        for (Friend friend : friends) {
+        for (Friendship friendship : friendships) {
 
-            if (friend.isOnline()) {
-                online.add(friend);
+            if (friendship.isOnline()) {
+                online.add(friendship);
             }
         }
 
         return online;
     }
 
-    private List<Friend> getOfflineFriends(Collection<Friend> friends) {
-        List<Friend> offline = new ArrayList<>();
+    private List<Friendship> getOfflineFriends(Collection<Friendship> friendships) {
+        List<Friendship> offline = new ArrayList<>();
 
-        for (Friend friend : friends) {
-            if (!friend.isOnline()) {
-                offline.add(friend);
+        for (Friendship friendship : friendships) {
+            if (!friendship.isOnline()) {
+                offline.add(friendship);
             }
         }
 
@@ -134,8 +134,8 @@ public class ListCmd implements SubCommand {
         return new TextComponent(first_line, previous_page, page_info, next_page, second_line);
     }
 
-    private TextComponent getOnlineFriendMessage(Friend friend) {
-        final ProxiedPlayer player = this.plugin.getProxy().getPlayer(friend.getUuid());
+    private TextComponent getOnlineFriendMessage(Friendship friendship) {
+        final ProxiedPlayer player = this.plugin.getProxy().getPlayer(friendship.getUuid());
 
         TextComponent remove = new TextComponent(MessageUtils.color("&c&l\u2717"));
         HoverEvent remove_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&cClick to unfriend " + player.getDisplayName())).create());
@@ -156,21 +156,21 @@ public class ListCmd implements SubCommand {
         join.setClickEvent(join_click);
 
         TextComponent username = new TextComponent(MessageUtils.color(" &a" + player.getDisplayName()));
-        HoverEvent friend_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&7Friends since&8:&a " + this.getDate(friend.getAdded()) + "\n&7Status&8:&a Online at " + player.getServer().getInfo().getName())).create());
+        HoverEvent friend_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&7Friends since&8:&a " + this.getDate(friendship.getAdded()) + "\n&7Status&8:&a Online at " + player.getServer().getInfo().getName())).create());
         username.setHoverEvent(friend_hover);
 
         return new TextComponent(OPEN_BRACKET, remove, message, join, CLOSED_BRACKET, username);
     }
 
-    private TextComponent getOfflineFriendMessage(Friend friend) {
+    private TextComponent getOfflineFriendMessage(Friendship friendship) {
         TextComponent remove = new TextComponent(MessageUtils.color("&c&l\u2717"));
-        HoverEvent remove_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&cClick to unfriend " + friend.getUsername())).create());
-        ClickEvent remove_click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/f remove " + friend.getUsername());
+        HoverEvent remove_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&cClick to unfriend " + friendship.getUsername())).create());
+        ClickEvent remove_click = new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/f remove " + friendship.getUsername());
         remove.setHoverEvent(remove_hover);
         remove.setClickEvent(remove_click);
 
-        TextComponent username = new TextComponent(MessageUtils.color(" &c" + friend.getUsername()));
-        HoverEvent friend_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&7Friends since&8:&a " + this.getDate(friend.getAdded()) + "\n&7Status&8:&c Offline")).create());
+        TextComponent username = new TextComponent(MessageUtils.color(" &c" + friendship.getUsername()));
+        HoverEvent friend_hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageUtils.color("&7Friends since&8:&a " + this.getDate(friendship.getAdded()) + "\n&7Status&8:&c Offline")).create());
         username.setHoverEvent(friend_hover);
 
         return new TextComponent(OPEN_BRACKET, remove, CLOSED_BRACKET, username);

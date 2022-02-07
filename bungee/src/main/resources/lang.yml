@@ -1,0 +1,106 @@
+# Json text components are fully supported.
+
+# A link to make creating json text components easier.
+# https://minecraft.tools/en/json_text.php
+
+invalid_arguments: "&cInvalid arguments! Try: %command%"
+no_permission: "{\"text\":\"You do not have permission to execute this command.\",\"color\":\"red\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Permission required: %permission%\"}}"
+unknown_player: "&cCould not find the player '%player%.'"
+reload_success: "&aPlugin successfully reloaded!"
+reload_fail: "&cPlugin reloaded with an error! Check console."
+
+command_list_header: "&8&l&m---------------[&6 Friends Help &8&l&m]---------------"
+# Not actually implemented yet. I have to change some things in the help command before I can do this.
+command_list_item: ""
+help: "[\"\",{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% accept \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"%label% accept <player>\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% accept \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Accepts a pending friend request.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% add \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"%label% add \",\"color\":\"gold\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% add \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"<player>\",\"color\":\"gold\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Sends a player a friend request.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% deny \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"%label% deny <player>\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% deny \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Denies a pending friend request.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% join \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"%label% join <player>\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% join \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Connects you to a friend's server.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% list\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\"%label% list\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% list\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Lists your friends.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% remove \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\"%label% remove <player>\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"/%label% remove \"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to paste command into chat.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Removes a player from your friend list.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% requests\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\"%label% requests\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% requests\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Lists all of your pending friend requests.\",\"color\":\"gray\"},{\"text\":\"\n\"},{\"text\":\"/\",\"color\":\"dark_gray\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% settings\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\"%label% settings\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/%label% settings\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to run command.\"}},{\"text\":\" -\",\"color\":\"dark_gray\"},{\"text\":\" Opens the friends settings menu.\",\"color\":\"gray\"}]"
+command_list_footer: "&8&l&m------------------------------------------"
+
+####################
+# Request messages #
+####################
+
+# Message sent to the player when they join if they have friend requests.
+request_notification: "[\"\",{\"text\":\"You have %amount% pending friend requests! Click \",\"color\":\"green\"},{\"text\":\"here\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend requests\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to view friend requests.\"}},{\"text\":\" to view them.\",\"color\":\"green\"}]"
+
+# The header of the request list...
+request_list_header: "&8&l&m--------------[&6 Friend Requests &8&l&m]--------------"
+# Message displayed if the player has no friend requests.
+request_list_empty: "&cNo pending requests."
+# How requester names will look in the request list.
+request_list_item: "[\"\",{\"text\":\"[\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend accept %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to accept.\"}},{\"text\":\"\u2714\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend accept %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to accept.\"}},{\"text\":\"]\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend accept %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to accept.\"}},{\"text\":\" \",\"color\":\"#6A8759\"},{\"text\":\"[\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend deny %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to deny.\"}},{\"text\":\"\u2718\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend deny %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to deny.\"}},{\"text\":\"]\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend deny %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to deny.\"}},{\"text\":\" \",\"color\":\"red\"},{\"text\":\"%player%\",\"color\":\"dark_aqua\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Sent: %date%\"}},{\"text\":\" \",\"color\":\"#6A8759\"}]"
+# The footer of the request list...
+request_list_footer: "&8&l&m------------------------------------------"
+
+# Message sent when a player is not accepting friend requests.
+requests_not_allowed: "&c%player% is not allowing friend requests."
+# Message sent when the player already sent a friend request to a player.
+request_already_sent: "&cYou already sent a friend request to %player%."
+# Message sent when the friend request doesn't exist.
+request_not_found: "&cNo friend request from %player%."
+
+# Message sent to the person who received the request.
+request_receiver: "[\"\",{\"text\":\"[\\u2713]\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend accept %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to accept\"}},{\"text\":\" \",\"color\":\"#6A8759\"},{\"text\":\"[\\\\u2713]\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend deny %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to deny.\"}},{\"text\":\" New friend request! From \",\"color\":\"green\"},{\"text\":\"%player%\",\"color\":\"dark_aqua\"}]"
+# Message sent to the person who sent the request.
+request_sender: "&aRequest sent to %player%."
+
+# Message sent to the person who received the request.
+request_accept_receiver: "&aYou and %player% are now friends!"
+# Message sent to the person who sent the request.
+request_accept_sender: "&a%player% accepted your friend request. You are now friends!"
+
+# Message sent to the person who received the request.
+reqest_deny_receiver: "&cYou denied %player%'s request."
+# Message sent to the person who sent the request.
+reqest_deny_sender: "&c%player% denied your friend request."
+
+##############################
+# Friend management messages #
+##############################
+
+friend_list_invalid_page: "&cInvalid page number!"
+# The header of the friend list...
+friend_list_header: "[\"\",{\"text\":\"------------[\",\"bold\":true,\"strikethrough\":true,\"color\":\"dark_gray\"},{\"text\":\" \",\"color\":\"#6A8759\"},{\"text\":\"\\u00AB\",\"color\":\"gray\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend list %previous_page%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Previous page.\"}},{\"text\":\" Friend list page\",\"color\":\"gold\"},{\"text\":\":\",\"color\":\"dark_gray\"},{\"text\":\" %page% \",\"color\":\"gold\"},{\"text\":\"\\u00BB\",\"color\":\"gray\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend list %next_page%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Next page.\"}},{\"text\":\" \",\"color\":\"gray\"},{\"text\":\"]------------\",\"bold\":true,\"strikethrough\":true,\"color\":\"dark_gray\"}]"
+# Message displayed if the player has no friends.
+friend_list_empty: "&cYou don't have any friends :("
+# How friend names will look in the friend list when the friend is online.
+friend_list_item_online: "[\"\",{\"text\":\"[\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend remove %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to unfriend %player%.\"}},{\"text\":\"\\u2717\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend remove %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to unfriend %player%.\"}},{\"text\":\" \",\"color\":\"red\"},{\"text\":\"\\u270E\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/msg %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to message %player%.\"}},{\"text\":\" \",\"color\":\"aqua\"},{\"text\":\"\\u27A4\",\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend join %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to connect to %server%.\"}},{\"text\":\"] \",\"color\":\"aqua\"},{\"text\":\"%player%\",\"color\":\"dark_aqua\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Friends Since: %friend_date%Online Since: %last_online%\"}}]"
+# How friend names will look in the friend list when the friend is offline.
+friend_list_item_offline: "[\"\",{\"text\":\"[\",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend remove %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to unfriend %player%.\"}},{\"text\":\"\\u2717\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend remove %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to unfriend %player%.\"}},{\"text\":\"] \",\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend remove %player%\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to unfriend %player%.\"}},{\"text\":\" \",\"color\":\"red\"},{\"text\":\"%player%\",\"color\":\"dark_aqua\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Friends Since: %friend_date%\nLast Online: %last_online%\"}}]"
+# The footer of the friend list...
+friend_list_footer: "&8&l&m-------------------------------------------"
+
+# Message sent when a player is already friends with another player.
+friend_already_exists: "&cYou are already friends with %player.%"
+# Message sent when the player is not friends with another player.
+friend_not_found: "&cYou are not friends with %player%."
+# Message sent when a player tries to friend him/herself.
+friend_self: "&cYou cannot friend yourself."
+# Message sent to a player if their friend list is full.
+friend_list_full_self: "&cYour friend list is full. Maybe remove some inactive friends?"
+# Message sent to a player if another player's friend list is full.
+friend_list_full_other: "&c%player%'s friend list is full."
+
+# Message sent to the person who removed the friend.
+friend_remove_remover: "&cYou have unfriended %player%."
+# No, I didn't miss 'friend_remove_all_remover' it just sends the normal remove message to everyone.
+friend_remove_all_remover: "&cYou have cleared your friend list."
+# Message sent to the person who was unfriended. Leave blank ("") for no message.
+friend_remove_removed: "&c%player% has removed you from their friend list."
+
+#####################
+# Settings messages #
+#####################
+
+# The header of the setting list...
+setting_list_header: "&8&l&m-----------------[&6 Settings &8&l&m]-----------------"
+# How setting will look in the settings list when enabled.
+setting_list_item_enabled: "[\"\",{\"text\":\"[\",\"color\":\"dark_gray\"},{\"text\":\"\\u2717\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend setting %setting% false\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to disable setting.\"}},{\"text\":\" \",\"color\":\"#CC7832\"},{\"text\":\"\\u2713\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend setting %setting% true\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to enable setting.\"}},{\"text\":\"] \",\"color\":\"dark_gray\"},{\"text\":\"%description%\",\"color\":\"green\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Setting is currently enabled.\"}}]"
+# How setting will look in the settings list when disabled.
+setting_list_item_disabled: "[\"\",{\"text\":\"[\",\"color\":\"dark_gray\"},{\"text\":\"\\u2717\",\"bold\":true,\"color\":\"red\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend setting %setting% false\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to disable setting.\"}},{\"text\":\" \",\"color\":\"#CC7832\"},{\"text\":\"\\u2713\",\"bold\":true,\"color\":\"green\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/friend setting %setting% true\"},\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Click to enable setting.\"}},{\"text\":\"] \",\"color\":\"dark_gray\"},{\"text\":\"%description%\",\"color\":\"red\",\"hoverEvent\":{\"action\":\"show_text\",\"contents\":\"Setting is currently disabled.\"}}]"
+# The footer of the setting list...
+setting_list_footer: "&8&l&m------------------------------------------"
+
+# Message sent when the player tries to set the setting to a value that is not a boolean.
+setting_not_boolean: "&cInvalid setting value. Use (true/false)"
+# Message sent when the player tries to change an invalid setting.
+setting_unknown: "&cUnknown setting. ('%setting%')"

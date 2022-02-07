@@ -19,7 +19,7 @@ public class RequestsCmd implements SubCommand {
     }
 
     @Override
-    public void execute(CommandSender sender, String... args) {
+    public void execute(CommandSender sender, String label, String... args) {
         if (!(sender instanceof ProxiedPlayer)) {
             return;
         }

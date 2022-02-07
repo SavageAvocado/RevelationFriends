@@ -3,6 +3,7 @@ package net.revelationmc.friends.bungee.commands.subcommands;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.revelationmc.friends.bungee.RevelationFriendsPlugin;
+import net.revelationmc.friends.bungee.config.Lang;
 import net.revelationmc.friends.bungee.utils.MessageUtils;
 
 public class JoinCmd implements SubCommand {
@@ -13,7 +14,7 @@ public class JoinCmd implements SubCommand {
     }
 
     @Override
-    public void execute(CommandSender sender, String... args) {
+    public void execute(CommandSender sender, String label, String... args) {
         if (!(sender instanceof ProxiedPlayer)) {
             return;
         }
@@ -21,7 +22,7 @@ public class JoinCmd implements SubCommand {
         ProxiedPlayer player = (ProxiedPlayer) sender;
 
         if (args.length == 1) {
-            MessageUtils.message(player, "&cInvalid arguments! Try: /friend join <player>");
+            Lang.INVALID_ARGUMENTS.send(player, new Lang.Placeholder("%command%", "/" + label + " join <player>"));
             return;
         }
 

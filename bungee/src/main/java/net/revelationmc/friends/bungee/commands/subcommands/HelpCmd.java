@@ -5,6 +5,7 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.revelationmc.friends.bungee.config.Lang;
 import net.revelationmc.friends.bungee.utils.MessageUtils;
 
 import java.util.ArrayList;
@@ -33,19 +34,19 @@ public class HelpCmd implements SubCommand {
     }
 
     @Override
-    public void execute(CommandSender sender, String... args) {
+    public void execute(CommandSender sender, String label, String... args) {
         if (!(sender instanceof ProxiedPlayer)) {
             return;
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
 
-        MessageUtils.message(player, "&8&l&m------------[&6 Friends Help &8&l&m]------------");
+        Lang.COMMAND_LIST_HEADER.send(player);
 
         for (BaseComponent[] components : MESSAGES) {
             player.sendMessage(components);
         }
 
-        MessageUtils.message(player, "&8&l&m------------------------------------------");
+        Lang.COMMAND_LIST_FOOTER.send(player);
     }
 }

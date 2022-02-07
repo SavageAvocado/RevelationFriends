@@ -7,7 +7,7 @@ import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import net.revelationmc.friends.bungee.RevelationFriendsPlugin;
-import net.revelationmc.friends.bungee.model.friend.Friend;
+import net.revelationmc.friends.bungee.model.friend.Friendship;
 import net.revelationmc.friends.bungee.model.user.User;
 import net.revelationmc.friends.bungee.model.user.UserSetting;
 import net.revelationmc.friends.bungee.utils.MessageUtils;
@@ -35,9 +35,9 @@ public class ConnectionListener implements Listener {
         this.plugin.getStorage().createUser(uuid, username).thenAccept(v -> event.completeIntent(this.plugin));
 
         final User user = this.plugin.getUserManager().getOrLoad(uuid).join();
-        for (Friend friend : user.getFriends()) {
-            if (friend.isOnline() && this.plugin.getUserManager().getOrLoad(friend.getUuid()).join().getSettings().get(UserSetting.JOIN_MESSAGES)) {
-                MessageUtils.message(this.plugin.getProxy().getPlayer(friend.getUuid()), "&3Friends &8|&7 " + username + " &7joined.");
+        for (Friendship friendship : user.getFriends()) {
+            if (friendship.isOnline() && this.plugin.getUserManager().getOrLoad(friendship.getUuid()).join().getSettings().get(UserSetting.JOIN_MESSAGES)) {
+                MessageUtils.message(this.plugin.getProxy().getPlayer(friendship.getUuid()), "&3Friends &8|&7 " + username + " &7joined.");
             }
         }
     }
@@ -60,9 +60,9 @@ public class ConnectionListener implements Listener {
         final User user = this.plugin.getUserManager().unload(event.getPlayer().getUniqueId());
         this.plugin.getStorage().saveUser(user)
                 .whenComplete((v, err) -> {
-                    for (Friend friend : user.getFriends()) {
-                        if (friend.isOnline() && this.plugin.getUserManager().getOrLoad(friend.getUuid()).join().getSettings().get(UserSetting.QUIT_MESSAGES)) {
-                            MessageUtils.message(this.plugin.getProxy().getPlayer(friend.getUuid()), "&3Friends &8|&7 " + event.getPlayer().getDisplayName() + " &7left.");
+                    for (Friendship friendship : user.getFriends()) {
+                        if (friendship.isOnline() && this.plugin.getUserManager().getOrLoad(friendship.getUuid()).join().getSettings().get(UserSetting.QUIT_MESSAGES)) {
+                            MessageUtils.message(this.plugin.getProxy().getPlayer(friendship.getUuid()), "&3Friends &8|&7 " + event.getPlayer().getDisplayName() + " &7left.");
                         }
                     }
                 });
